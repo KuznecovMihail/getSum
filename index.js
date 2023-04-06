@@ -33,13 +33,13 @@ console.log(flatten(array, 1))
 
 const str = 'brad100milk133.21chokolate100.100.09';
 
-const getSum = () =>{
+const getSum = (str) =>{
     let arr = str.split(/[^0-9, ^.]/)
     arr = arr.filter((value) => value != '')
     let parseArr = arr.map((value) => {
         let parse = value.split('.')
         if (value.length > 3 && value.indexOf('.') == -1) return NaN
-        if((parse[parse.length - 1].length != 2 || parse[0].length > 3) && parse.length > 1) return NaN
+        if(((parse[parse.length - 1].length != 2 || parse[parse.length - 1] == '00') || parse[0].length > 3) && parse.length > 1) return NaN
         if(value.indexOf('.') === 0) return NaN
         for (let i = 1; i < parse.length - 1; i++){
             if(parse[i].length !== 3) return NaN
@@ -54,7 +54,7 @@ const getSum = () =>{
         return value
     })
     let sum = parseArr.reduce((acc, value) => acc + value, 0)
-    return !isNaN(sum) ? sum : 'Incorrect value'
+    return sum
 }
 
 
